@@ -31,6 +31,7 @@ git clone https://github.com/fenglingcong/vue2_news.git
 # install dependencies
 npm install
 
+# serve with hot reload at localhost:8080
 npm run dev
 
 # build for production with minification
