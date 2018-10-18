@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import indexModule from './modules/index'
+import detailModule from './modules/detail'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   mutations,
   actions,
   modules: {
-    index: indexModule
+    index: indexModule,
+    detail: detailModule
   }
 })

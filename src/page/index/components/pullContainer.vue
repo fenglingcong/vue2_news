@@ -87,7 +87,6 @@ export default {
         this.get_listItem_cache(this.indexActive)
           .then(res => {
             if (res) {
-              console.log(res)
               this.contentJson = res
               this.handleLocation('get')
               this.loading = false
@@ -108,6 +107,8 @@ export default {
             this.classPage++
             // 文章数量提示
             $(`.container.${this.type} .dataCount`).slideDown(200).delay(1000).slideUp(200)
+            // 加载浏览记录
+            this.newLookHere()
           } else {
             // 没有文章数据提示
             $(`.container.${this.type} .noNewData`).slideDown(200).delay(1000).slideUp(200)
@@ -130,6 +131,7 @@ export default {
       this.bottomLock = true // 上滑开关
       this.get_listItem_data(this.classPage)
         .then(res => {
+          console.log(res)
           if (res) {
             this.contentJson.push(...res)
             this.classPage++
@@ -139,6 +141,27 @@ export default {
           }
           this.bottomLock = false
         })
+    },
+    // 创建historyLook元素
+    newLookHere () {
+      if (this.dataCount >= 10) {
+        let lookIndex = this.contentJson.findIndex((n) => n.type === 'lookHere')
+        if (lookIndex > 0) {
+          this.contentJson.splice(lookIndex, 1) // 删除数据里面的look数据
+        }
+        this.contentJson.splice(10, 0, {type: 'lookHere'}) // 始终在第11个位置里添加look数据  模拟浏览记录
+      }
+      this.$nextTick(() => {
+        $(`.${this.indexActive} #lookHere`).prev().css('border', 'none')
+      })
+    },
+    // 点击look元素，发请求
+    lookHereClick () {
+      $(`.container.${this.type}`).on('click', '#lookHere', () => {
+        $(`.container.${this.indexActive}`).animate({scrollTop: 0}, () => {
+          this.loadTopAjax()
+        })
+      })
     },
     // mint-ui 下拉组件的状态
     handleTopChange (status) {
@@ -166,6 +189,7 @@ export default {
   },
   mounted () {
     this.init()
+    this.lookHereClick()
   },
   // keep-alive激活时调用
   activated () {

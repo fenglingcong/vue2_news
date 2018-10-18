@@ -1,14 +1,32 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <transition :name='transitionName'>
+      <keep-alive exclude="detail">
+        <router-view class="child-view"></router-view>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      transitionName: ''
+    }
+  },
+  beforeRouteUpdate (to, from, next) {
+    let isBack = this.$router.isBack
+    console.log(isBack)
+    if (isBack) {
+      this.transitionName = 'slide-right'
+    } else {
+      this.transitionName = 'slide-left'
+    }
+    this.$router.isBack = false
+    next()
+  }
 }
 </script>
 
@@ -19,5 +37,14 @@ export default {
   height: 100%;
   background: #f6f6f6;
   overflow: hidden;
+  .child-view{
+    transition: all 3s ease;
+  }
+  .slide-left-enter,.slide-right-leave-active {
+    transform: translate3d(50%, 0, 0);
+  }
+  .slide-left-leave-active,.slide-right-enter {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 </style>

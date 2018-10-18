@@ -1,73 +1,75 @@
 <template>
   <div>
-    <ul class="listItem" v-for="(item, index) in itemJson" :key="index">
-      <!-- 视频 -->
-      <li v-if="item.playonlineurl">
-        <router-link :to="url(item)" class="video">
-          <div class="video_wrapper">
-            <div class="video_info">
-              <div class="video_title">
-                <p v-html="item.title"></p>
+    <ul class="listItem">
+      <li v-for="(item, index) in itemJson" :key="index" :id="item.type ? 'lookHere' : ''">
+        <!-- 视频 -->
+        <template v-if="item.playonlineurl">
+          <router-link :to="url(item)" class="video">
+            <div class="video_wrapper">
+              <div class="video_info">
+                <div class="video_title">
+                  <p v-html="item.title"></p>
+                </div>
+                <div class="totalTime">{{item.playtime}}</div>
+                <img v-lazy.container="item.titlepic">
               </div>
-              <div class="totalTime">{{item.playtime}}</div>
+              <div class="playRound">
+                <div class="playSan"></div>
+              </div>
+            </div>
+            <listInfo :json="item"></listInfo>
+          </router-link>
+        </template>
+        <!-- 1张大图 -->
+        <template v-else-if="item.ptitlepic">
+          <router-link :to="url(item)" class="oneLarge">
+            <div class="news_title">
+              <h3 v-html="item.title"></h3>
+            </div>
+            <div class="news_img">
+              <img v-lazy.container="item.ptitlepic">
+            </div>
+            <list-info :json="item"></list-info>
+          </router-link>
+        </template>
+        <!-- 3张小图 -->
+        <template v-else-if="item.titlepic3">
+          <router-link :to="url(item)" class="threeSmall">
+            <div class="news_title">
+              <h3 v-html="item.title"></h3>
+            </div>
+            <div class="list_img">
+              <ul>
+                <li><img v-lazy.container="item.titlepic"></li>
+                <li><img v-lazy.container="item.titlepic2"></li>
+                <li><img v-lazy.container="item.titlepic3"></li>
+              </ul>
+            </div>
+            <list-info :json="item"></list-info>
+          </router-link>
+        </template>
+        <!-- 1张小图 -->
+        <template v-else-if="item.titlepic">
+          <router-link :to="url(item)" class="oneSmall">
+            <div class="news_title">
+              <h3 v-html="item.title"></h3>
+              <list-info :json="item"></list-info>
+            </div>
+            <div class="news_img">
               <img v-lazy.container="item.titlepic">
             </div>
-            <div class="playRound">
-              <div class="playSan"></div>
-            </div>
-          </div>
-          <listInfo :json="item"></listInfo>
-        </router-link>
-      </li>
-      <!-- 1张大图 -->
-      <li v-else-if="item.ptitlepic">
-        <router-link :to="url(item)" class="oneLarge">
-          <div class="news_title">
+          </router-link>
+        </template>
+        <!-- 文字 -->
+        <template v-else-if="item.title">
+          <router-link :to="url(item)" class="text">
             <h3 v-html="item.title"></h3>
-          </div>
-          <div class="news_img">
-            <img v-lazy.container="item.ptitlepic">
-          </div>
-          <list-info :json="item"></list-info>
-        </router-link>
-      </li>
-      <!-- 3张小图 -->
-      <li v-else-if="item.titlepic3">
-        <router-link :to="url(item)" class="threeSmall">
-          <div class="news_title">
-            <h3 v-html="item.title"></h3>
-          </div>
-          <div class="list_img">
-            <ul>
-              <li><img v-lazy.container="item.titlepic"></li>
-              <li><img v-lazy.container="item.titlepic2"></li>
-              <li><img v-lazy.container="item.titlepic3"></li>
-            </ul>
-          </div>
-          <list-info :json="item"></list-info>
-        </router-link>
-      </li>
-      <!-- 1张小图 -->
-      <li v-else-if="item.titlepic">
-        <router-link :to="url(item)" class="oneSmall">
-          <div class="news_title">
-            <h3 v-html="item.title"></h3>
-            <list-info :json="item"></list-info>
-          </div>
-          <div class="news_img">
-            <img v-lazy.container="item.titlepic">
-          </div>
-        </router-link>
-      </li>
-      <!-- 文字 -->
-      <li v-else-if="item.title">
-        <router-link :to="url(item)" class="text">
-          <h3 v-html="item.title"></h3>
-          <list-info :json="section"></list-info>
-        </router-link>
-      </li>
-      <li v-else-if="item.type" id="lookHere">
-        <p>上次看到这里，点击刷新<i class="icon-refresh"></i></p>
+            <list-info :json="section"></list-info>
+          </router-link>
+        </template>
+        <template v-else-if="item.type" id="lookHere">
+          <p>上次看到这里，点击刷新<i class="icon-refresh"></i></p>
+        </template>
       </li>
     </ul>
   </div>
