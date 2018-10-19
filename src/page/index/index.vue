@@ -1,8 +1,13 @@
 <template>
   <div id="index">
     <indexHeader/>
+    <!-- 内容区域 -->
     <swiperContainer/>
     <indexFooter/>
+    <!-- 子页面视图 -->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

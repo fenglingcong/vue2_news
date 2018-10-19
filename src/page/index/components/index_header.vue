@@ -7,7 +7,7 @@
           <a class="title" @click.stop="goTop"></a>
         </div>
         <div class="abs_r">
-          <a class="search_btn"></a>
+          <a class="search_btn" @click.stop="$router.push('/search')"></a>
         </div>
       </div>
     </header>
@@ -19,7 +19,7 @@
       <!-- 更多栏目 -->
       <div class="nav_menu">
         <div class="shadow"></div>
-        <a href="javascript:;" class="more_btn"></a>
+        <a href="javascript:;" class="more_btn" @click.stop="$router.push('/index/channel')"></a>
       </div>
     </nav>
   </div>

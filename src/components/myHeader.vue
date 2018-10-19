@@ -40,6 +40,7 @@ export default {
     align-items: center;
     position: relative;
     height: .5rem;
+    line-height: .5rem;
     user-select: none;
     a{
       display: inline-block;
@@ -47,6 +48,7 @@ export default {
       height: 100%;
     }
     .abs_l, .abs_r{
+      width: .5rem;
       height: 100%;
     }
     .abs_m{

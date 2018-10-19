@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import indexModule from './modules/index'
 import detailModule from './modules/detail'
+import searchModule from './modules/search'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   actions,
   modules: {
     index: indexModule,
-    detail: detailModule
+    detail: detailModule,
+    search: searchModule
   }
 })
