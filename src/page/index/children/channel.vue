@@ -172,6 +172,7 @@ export default {
         display: inline-block;
         width: 25%;
         line-height: 0;
+        animation: zoomIn .3s ease;
         a{
           display: block;
           margin: 0 10px;
@@ -186,6 +187,15 @@ export default {
         }
       }
     }
+  }
+}
+@keyframes zoomIn{
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3)
+  }
+  50% {
+    opacity: 1;
   }
 }
 </style>
