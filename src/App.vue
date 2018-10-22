@@ -16,15 +16,8 @@ export default {
       transitionName: ''
     }
   },
-  watch: {
-    $route (to, from) {
-      console.log(to)
-      console.log(from)
-    }
-  },
   beforeRouteUpdate (to, from, next) {
     let isBack = this.$router.isBack
-    console.log(isBack)
     if (isBack) {
       this.transitionName = 'slide-right' // 返回
     } else {

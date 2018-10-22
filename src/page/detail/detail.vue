@@ -1,11 +1,11 @@
 <template>
   <div id="detail">
-    <myHeader fixed :title="title">
+    <myHeader fixed :title="title" v-goTop:click="true">
       <a slot="left" class="back-black" @click.stop="$router.go(-1)"></a>
       <a slot="right" class="menu" @click.stop="$refs.share.toggle()"></a>
     </myHeader>
     <div class="content">
-      <div class="container">
+      <div class="container" v-slide:slideRight="true">
         <!-- 正文 -->
         <myArticle v-if="articleJson" :json="articleJson"></myArticle>
         <!-- 标签 -->

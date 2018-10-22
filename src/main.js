@@ -23,6 +23,8 @@ import listItem from '@/components/listItem' // 文章列表组件
 import commentItem from '@/components/commentItem' // 评论列表组件
 import popupMenu from '@/components/popupMenu' // 弹窗组件
 
+import '@/directives'
+
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(MintUI)

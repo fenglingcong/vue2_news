@@ -4,7 +4,7 @@
       <myHeader fixed title="频道管理">
         <a class="back-white" slot="left" @click="$router.go(-1)"></a>
       </myHeader>
-      <div class="content">
+      <div class="content" v-slide:slideRight="true">
         <div class="container">
           <!-- 我的频道 -->
           <section class="column">

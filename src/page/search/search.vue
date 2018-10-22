@@ -11,7 +11,7 @@
         <a class="search_btn" slot="right" @click.stop="get_search" :class="key ? 'on' : ''">搜索</a>
       </myHeader>
     </div>
-    <div class="content">
+    <div class="content" v-slide:slideRight="true">
       <!-- 搜索推荐 -->
       <template v-if="search_state === 'recommend'">
         <div class="search_recommend">
