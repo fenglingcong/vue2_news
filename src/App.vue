@@ -16,10 +16,17 @@ export default {
       transitionName: ''
     }
   },
+  watch: {
+    $route (to, from) {
+      console.log(to)
+      console.log(from)
+    }
+  },
   beforeRouteUpdate (to, from, next) {
     let isBack = this.$router.isBack
+    console.log(isBack)
     if (isBack) {
-      this.transitionName = 'slide-right'
+      this.transitionName = 'slide-right' // 返回
     } else {
       this.transitionName = 'slide-left'
     }
@@ -29,7 +36,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
 #app {
   position: relative;
   width: 100%;
@@ -37,13 +44,19 @@ export default {
   background: #f6f6f6;
   overflow: hidden;
   .child-view{
-    transition: all 3s ease;
+    transition: all .3s ease;
   }
-  .slide-left-enter,.slide-right-leave-active {
-    transform: translate3d(50%, 0, 0);
-  }
-  .slide-left-leave-active,.slide-right-enter {
-    transform: translate3d(-50%, 0, 0);
-  }
+}
+.slide-left-enter {
+    transform: translate3d(0, 0, 0);
+}
+.slide-left-leave-to {
+    transform: translate3d(-100%, 0, 0);
+}
+.slide-right-enter {
+    transform: translate3d(0, 0, 0);
+}
+.slide-right-leave-to {
+    transform: translate3d(100%, 0, 0);
 }
 </style>

@@ -189,6 +189,32 @@ export default {
     }
   }
 }
+.fadeIn-enter-active {
+  animation: fadeInRight .3s ease;
+}
+.fadeIn-leave-active {
+  animation: fadeOutRight .3s ease;
+}
+@keyframes fadeInRight{
+  from{
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  to{
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeOutRight{
+  from{
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to{
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+}
 @keyframes zoomIn{
   0% {
     opacity: 0;
